@@ -12,7 +12,39 @@
 8. <a href="https://github.com/xiaoniudadi/blog_demo_android/tree/master/MaterDesgin_demo">materdesgin</a>
 9. 设计模式
 
+## cache
+
+<a href="http://www.paulniu.com/2016/04/15/android-6-cache/">重拾android路(六) 缓存</a>
+
+## json解析
+
+<a href="http://www.paulniu.com/2016/02/29/android-4-json/">重拾Android路(四) json解析</a>
+
+## 网络请求
+
+<a href="http://www.paulniu.com/2016/02/19/Android-3-network/">重拾android路(三) 网络请求</a>
+
+## RxAndroid
+
+<a href="http://www.paulniu.com/2016/03/23/android-5-rejava/">重拾Android路(五) RxJava和RxAndroid</a>
+
+## UIDesgin
+
+<a href="http://www.paulniu.com/2016/05/15/android-8-uiframework/">重拾android路(八) UI</a> 
+
+## 启动模式
+
+<a href="http://www.paulniu.com/2016/08/28/android-14-start-mode/">重拾android路(十四) 启动模式</a> 
+
+## 权限
+
+<a href="http://www.paulniu.com/2016/08/05/android-13-permission/">重拾android路(十三) 权限</a>
+
+## materdesgin
+
+<a href="http://www.paulniu.com/2016/07/20/android-12-materialdesign/">重拾android路(十二) material design</a> 
 
 
 > 以梦为码，不负韶华
+
 > <a href="http://www.paulniu.com">个人博客</a>
