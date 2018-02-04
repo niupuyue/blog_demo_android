@@ -7,27 +7,34 @@
     android:orientation="vertical"
     tools:context="com.caches.niupule.network_demo.MainActivity">
 
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/btn01"
-       android:text="原生网络请求"/>
-
     <Button
+        android:id="@+id/btn04"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="原生" />
+
+    <Button
+        android:id="@+id/btn01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sync_http" />
+
+    <Button
         android:id="@+id/btn02"
-        android:text="okhttp"/>
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="okhttp" />
+
+    <Button
         android:id="@+id/btn03"
-        android:text="Retrofit"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retrofit" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="本来还应该有Volley，但是这个已经很少用了，现在最流行的还是OKHttp，所以就不写了"/>
+        android:text="本来还应该有Volley，但是这个已经很少用了，现在最流行的还是OKHttp，所以就不写了" />
 
 </LinearLayout>

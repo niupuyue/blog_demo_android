@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.caches.niupule.network_demo">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +21,7 @@
         <activity android:name=".AsyncActivity"></activity>
         <activity android:name=".OKHttpActivity"></activity>
         <activity android:name=".RetrofitActivity"></activity>
+        <activity android:name=".BaseHttpActivity"></activity>
     </application>
 
 </manifest>
