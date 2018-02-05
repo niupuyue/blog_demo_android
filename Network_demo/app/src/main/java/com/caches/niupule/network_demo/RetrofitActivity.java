@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.caches.niupule.network_demo.domain.Info;
+import com.caches.niupule.network_demo.domain.JobInfo;
 import com.caches.niupule.network_demo.domain.UserInfo;
+import com.caches.niupule.network_demo.untils.RetrofitUtil.RetrofitUtil;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,8 +31,20 @@ public class RetrofitActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit);
 
-        post();
+//        post();
 
+        Call<JobInfo> call = RetrofitUtil.getInstance().get();
+        call.enqueue(new Callback<JobInfo>() {
+            @Override
+            public void onResponse(Call<JobInfo> call, Response<JobInfo> response) {
+                Log.e("retrofit",response.body().getData().toString());
+            }
+
+            @Override
+            public void onFailure(Call<JobInfo> call, Throwable t) {
+
+            }
+        });
     }
 
     public void post(){

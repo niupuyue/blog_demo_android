@@ -1,6 +1,7 @@
 package com.caches.niupule.network_demo.untils.RetrofitUtil;
 
 import com.caches.niupule.network_demo.domain.Info;
+import com.caches.niupule.network_demo.domain.JobInfo;
 
 import java.util.Map;
 
@@ -49,8 +50,8 @@ public interface IRetrofitHttp {
      *
      * @return
      */
-    @GET(getUrl + "?key=488c65f3230c0280757b50686d1f1cd5&&sort=asc&&time=1418816972")
-    Call<Info> get();
+    @GET(getUrl)
+    Call<JobInfo> get();
 
     /**
      * 传递map集合
