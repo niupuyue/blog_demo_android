@@ -29,6 +29,10 @@ public class RxjavaActivity extends Activity {
         setContentView(R.layout.activity_rxjava);
 
         rxjava_tv01 = findViewById(R.id.rxjava_tv01);
+        /**
+         * rxjava最基本的使用
+         * Observable被观察者：数据发生改变的对象
+         */
 
         //被观察者
         Observable observable = Observable.create(new ObservableOnSubscribe() {
