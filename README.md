@@ -22,6 +22,21 @@
 
 ## 网络请求
 
+网络请求是我们的手机应用中最常用的模块，手机应用对于网络请求的优劣直接决定了用户的体验。这里我们介绍了三种最常见也是在android开发历史中比较重要的三个框架。
+
+原生HttpClientRequest:这种网络请求是比较简单的网络请求，也是google公司最原始封装的网络请求框架，能够进行简单的网络请求，方面上手，对于新手而言是非常实用的学习基础。但是他的缺点也是显而易见的，对于请求框架封装的不太完善，而且由于android的机制要求在UI线程中刷新页面，导致我们需要大量的使用handler，那么有时候，我们会发生一些逻辑错误，而这些逻辑错误也是非常致命的。
+
+OKHttp:这种网络请求框架是google公司推荐和提倡使用的框架。不仅解决了handler大量使用的问题(因为在这里他帮我们将数据请求等内容进行了封装)，而且配合使用gilde的图片请求框架也是非常好用的
+
+Retrofit：目前最流行的网络请求框架。他是基于OKHttp网络请求框架的，所以在使用的时候，我们需要把相应的OKHttp的gradle依赖也添加进来。目前很多地方都在提倡使用数据绑定和异步操作的rxjava和rxAndroid，配合使用retrofit也可以很好的上手。
+
+至于具体的优缺点和如何使用博客中已经详细记载
+
+使用的版本均是最新版本，其中OKHttp必须是3.0以上，retrofit是2.0以上。rxjava和rxandroid可以使用1.x或者2.x，这里介绍的都是比较简单的，所以具体操作不影响
+
+<a href="https://github.com/square/retrofit">Retrofit</a><br/>
+<a href="https://github.com/square/okhttp">OKHttp</a>
+
 <a href="http://www.paulniu.com/2016/02/19/Android-3-network/">重拾android路(三) 网络请求</a>
 
 ## RxAndroid
