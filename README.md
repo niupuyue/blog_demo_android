@@ -12,6 +12,10 @@
 8. <a href="https://github.com/xiaoniudadi/blog_demo_android/tree/master/MaterDesgin_demo">materdesgin</a>
 9. 设计模式
 
+10. <a href="https://github.com/xiaoniudadi/blog_demo_android/tree/master/SelfUI_demo">自定义View</a>
+
+
+
 ## cache
 
 <a href="http://www.paulniu.com/2016/04/15/android-6-cache/">重拾android路(六) 缓存</a>
@@ -43,6 +47,10 @@
 ## materdesgin
 
 <a href="http://www.paulniu.com/2016/07/20/android-12-materialdesign/">重拾android路(十二) material design</a> 
+
+## 自定义View
+
+
 
 
 > 以梦为码，不负韶华

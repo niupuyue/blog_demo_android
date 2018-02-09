@@ -3,6 +3,7 @@ package com.caches.niupule.rxandroid_demo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 
 import io.reactivex.Observable;
@@ -49,12 +50,17 @@ public class RxJavaMergeActivity extends Activity {
 
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        disposable = d;
                     }
 
                     @Override
                     public void onNext(Integer integer) {
-
+                        Log.i("rxdjavamerge",integer+"");
+                        i++;
+                        if(i == 2){
+                            //如果是执行了两次了，那么这时候可以通过dispose()方法实现截断，然后就不会再接受后面的消息
+                            disposable.dispose();
+                        }
                     }
 
                     @Override
@@ -70,6 +76,12 @@ public class RxJavaMergeActivity extends Activity {
             }
         });
 
+        findViewById(R.id.btn_merge_02).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 }

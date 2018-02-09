@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RxjavaActivity"></activity>
+        <activity android:name=".RxJavaMergeActivity"></activity>
     </application>
 
 </manifest>
