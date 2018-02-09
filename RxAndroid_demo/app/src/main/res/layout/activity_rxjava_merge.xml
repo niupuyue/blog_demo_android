@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.caches.niupule.rxandroid_demo.MainActivity">
-
-    <Button
-        android:id="@+id/btn_01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="rxjava实现" />
+    android:orientation="vertical">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_02"
-        android:text="rxjava合并写法"/>
+        android:id="@+id/btn_merge_01"
+        android:text="普通合并"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_merge_02"
+        android:text="合并map"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_merge_03"
+        android:text="合并zip"/>
 
 </LinearLayout>
