@@ -18,11 +18,12 @@ import android.widget.ImageView;
 
 import com.caches.niupule.cache_demo.R;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.zip.Inflater;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
 
 /**
  * Created: niupule
@@ -40,10 +41,10 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     private Set<BitmapWorkTask> tasksCollections;
 
     //当前第一个可以看到的项目数
-    private int firstVisiableView;
+    private int mFirstVisiableItem;
 
     //当前可以看到的项目的个数
-    private int visiableItemCount;
+    private int mVisiableItemCount;
 
     //当前需要显示的照片墙
     private GridView gridView;
@@ -76,13 +77,14 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         final String url = getItem(position);
-        View view = null;
+        View view;
         if (convertView == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.item_lru_gridview, null);
         } else {
             view = convertView;
         }
         final ImageView photo = view.findViewById(R.id.lru_item_photo);
+        photo.setTag(url);
         setImageView(url, photo);
         return view;
     }
@@ -90,7 +92,7 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     //根据当前的imageview设置图片展示，如果有则显示，没有显示默认图片
     private void setImageView(String url, ImageView photo) {
         Bitmap bitmap = getBitmapFromMemoryCache(url);
-        if (bitmap == null) {
+        if (bitmap != null) {
             photo.setImageBitmap(bitmap);
         } else {
             photo.setImageResource(R.mipmap.ic_launcher);
@@ -119,10 +121,24 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         //只有当gridview的滑动停止之后才会，才会加载图片
         if (scrollState == SCROLL_STATE_IDLE) {
-            Log.i("onScrollstateChange","滚动状态发生改变");
-            loadBitmap(firstVisiableView, visiableItemCount);
+            Log.i("onScrollstateChange", "滚动状态发生改变");
+            loadBitmap(mFirstVisiableItem, mVisiableItemCount);
         } else {
             cancleAllTasks();
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        mFirstVisiableItem = firstVisibleItem;
+        mVisiableItemCount = visibleItemCount;
+        Log.i("onScroll", "当前第一次执行的时候的firstid和totalcount" + firstVisibleItem + ";" + totalItemCount);
+        // 下载的任务应该由onScrollStateChanged里调用，但首次进入程序时onScrollStateChanged并不会调用，
+        // 因此在这里为首次进入程序开启下载任务。
+        if (isFirstEnter && visibleItemCount > 0) {
+            Log.i("onScroll", totalItemCount + ":" + firstVisibleItem);
+            loadBitmap(firstVisibleItem, visibleItemCount);
+            isFirstEnter = false;
         }
     }
 
@@ -136,21 +152,21 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     private void loadBitmap(int firstVisiableId, int visiableCount) {
         //
         try {
-            for(int i = firstVisiableId;i < firstVisiableId + visiableCount - 1;i++){
+            for (int i = firstVisiableId; i < firstVisiableId + visiableCount; i++) {
                 String imageUrl = Images.imageThumbUrls[i];
                 Bitmap bitmap = getBitmapFromMemoryCache(imageUrl);
-                if(bitmap == null){
+                if (bitmap == null) {
                     BitmapWorkTask task = new BitmapWorkTask();
                     tasksCollections.add(task);
-                    task.equals(imageUrl);
-                }else {
+                    task.execute(imageUrl);
+                } else {
                     ImageView imageView = gridView.findViewWithTag(imageUrl);
-                    if(imageView != null && bitmap != null){
+                    if (imageView != null && bitmap != null) {
                         imageView.setImageBitmap(bitmap);
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -167,19 +183,6 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     }
 
 
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        this.firstVisiableView = firstVisibleItem;
-        this.visiableItemCount = totalItemCount;
-        // 下载的任务应该由onScrollStateChanged里调用，但首次进入程序时onScrollStateChanged并不会调用，
-        // 因此在这里为首次进入程序开启下载任务。
-        if (isFirstEnter && totalItemCount > 0) {
-            loadBitmap(firstVisibleItem, totalItemCount);
-            isFirstEnter = false;
-        }
-
-    }
-
     class BitmapWorkTask extends AsyncTask<String, Void, Bitmap> {
 
         //图片的地址
@@ -188,8 +191,8 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
         @Override
         protected Bitmap doInBackground(String... strings) {
             imageUrl = strings[0];
-            Bitmap bitmap = downloadBitmap(imageUrl);
-            Log.i("doinbackground",imageUrl);
+            Bitmap bitmap = downloadBitmap(strings[0]);
+            Log.i("doinbackground", imageUrl);
             if (bitmap != null) {
                 addBitmapToMemoryCache(strings[0], bitmap);
             }
@@ -208,20 +211,35 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
 
         private Bitmap downloadBitmap(String url) {
             Bitmap bitmap = null;
-            HttpURLConnection conn = null;
+//            Bitmap bitmap = null;
+//            HttpURLConnection conn = null;
+//            try {
+//                URL myurl = new URL(url);
+//                conn = (HttpURLConnection) myurl.openConnection();
+//                conn.setConnectTimeout(5000);
+//                conn.setReadTimeout(10 * 1000);
+//                conn.setDoOutput(true);
+//                conn.setDoInput(true);
+//                bitmap = BitmapFactory.decodeStream(conn.getInputStream());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (conn != null) {
+//                    conn.disconnect();
+//                }
+//            }
+
             try {
-                URL myurl = new URL(url);
-                conn = (HttpURLConnection) myurl.openConnection();
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(10 * 1000);
-                bitmap = BitmapFactory.decodeStream(conn.getInputStream());
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request request = new Request.Builder().url(url).build();
+                ResponseBody body = okHttpClient.newCall(request).execute().body();
+                bitmap = BitmapFactory.decodeStream(body.byteStream());
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                if (conn != null) {
-                    conn.disconnect();
-                }
             }
+
+
             return bitmap;
         }
     }
