@@ -1,47 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Android"
-        />
-    <Button
-        android:id="@+id/button"
-        android:layout_margin="8dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="调用JS"
-        android:background="@color/colorAccent"
-        android:textColor="#ffffff"
-        />
-    <Button
-        android:id="@+id/button2"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="调用有参JS"
-        android:background="@color/colorAccent"
-        android:textColor="#ffffff"
-        />
+        android:layout_height="?attr/actionBarSize"
+        app:subtitleTextColor="@color/colorAccent"
+        app:titleTextColor="@color/colorAccent"
+        android:background="#F0F0F0F0"
+        app:popupTheme="@style/ToolbarMenuStyle"
+        android:layout_alignParentTop="true"></android.support.v7.widget.Toolbar>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WebView"
-        android:layout_marginTop="8dp"
-        />
-
-    <WebView
-
-        android:id="@+id/webview"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_above="@id/bottomnavigation"
+        android:layout_below="@id/toolbar"></android.support.v4.view.ViewPager>
 
-</LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomnavigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#F0F0F0F0"
+        app:menu="@menu/menu_bottom_navigation"></android.support.design.widget.BottomNavigationView>
+
+
+</RelativeLayout>

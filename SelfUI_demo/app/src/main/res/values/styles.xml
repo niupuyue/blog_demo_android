@@ -8,4 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Base.AppTheme" parent="Theme.AppCompat">
+        <!--去掉原来的actionbar-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--设置主题颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackgroundColor</item>
+        <!--设置弹出窗样式-->
+        <item name="actionOverflowMenuStyle">@style/ToolbarMenuStyle</item>
+    </style>
+
+    <style name="ToolbarMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <!--是否覆盖锚点-->
+        <item name="overlapAnchor">true</item>
+        <!--设置弹出框的背景样式-->
+        <item name="android:popupBackground">#F0F0F0</item>
+        <!--弹出层垂直方向的偏移量 如果为负值会覆盖toolbar-->
+        <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
+        <!--弹出层的水平偏移量 负值会导致右边出现边隙-->
+        <item name="android:dropDownHorizontalOffset">-2dp</item>
+        <!--设置文字颜色-->
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 </resources>

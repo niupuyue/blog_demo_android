@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_main_edit"
+        android:icon="@mipmap/edit"
+        android:orderInCategory="80"
+        android:title="编辑"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_main_search"
+        android:icon="@mipmap/search"
+        android:orderInCategory="90"
+        android:title="搜索"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_main_share"
+        android:icon="@mipmap/share"
+        android:orderInCategory="100"
+        android:title="分享"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_main_setting"
+        android:icon="@mipmap/setting"
+        android:orderInCategory="110"
+        android:title="设置"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_main_keybroad"
+        android:icon="@mipmap/keybroad"
+        android:orderInCategory="120"
+        android:title="键盘"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_main_font"
+        android:icon="@mipmap/font"
+        android:orderInCategory="130"
+        android:title="字体"
+        app:showAsAction="never"></item>
+
+</menu>
