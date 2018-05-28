@@ -1,4 +1,4 @@
-package com.caches.niupule.uidesgin_demo.classes01.home;
+package com.caches.niupule.uidesgin_demo.classes01.home.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,13 +12,13 @@ import android.view.View;
 
 /**
  * Created: niupule
- * Date: 2018/5/28  下午5:30
+ * Date: 2018/5/28  下午5:27
  * E-mail:niupuyue@aliyun.com
  * des:
  */
 
-public class HomeDrawRoundRectView extends View {
-    public HomeDrawRoundRectView(Context context, @Nullable AttributeSet attrs) {
+public class HomeDrawOwlView extends View {
+    public HomeDrawOwlView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -28,9 +28,9 @@ public class HomeDrawRoundRectView extends View {
         super.onDraw(canvas);
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.parseColor("#D0896B"));
         paint.setAntiAlias(true);
-        paint.setColor(Color.parseColor("#D9362C"));
 
-        canvas.drawRoundRect(200,200,500,400,20,20,paint);
+        canvas.drawOval(200,200,500,400,paint);
     }
 }

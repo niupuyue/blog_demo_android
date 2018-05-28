@@ -3,4 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.caches.niupule.uidesgin_demo.classes01.home.views.Home1View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

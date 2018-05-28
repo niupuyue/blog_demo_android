@@ -1,4 +1,4 @@
-package com.caches.niupule.uidesgin_demo.classes01.home;
+package com.caches.niupule.uidesgin_demo.classes01.home.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -35,7 +35,7 @@ public class HomeDrawCircleView extends View {
         paint.setAntiAlias(true);
         paint.setStrokeWidth(5);
 
-        canvas.drawCircle(width/2,heigth/2,100,paint);
+        canvas.drawCircle(400,400,100,paint);
 
 
     }

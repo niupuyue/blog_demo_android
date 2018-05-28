@@ -1,4 +1,4 @@
-package com.caches.niupule.uidesgin_demo.classes01.home;
+package com.caches.niupule.uidesgin_demo.classes01.home.views;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <com.caches.niupule.uidesgin_demo.classes01.home.HomeDrawCircleView
+    <com.caches.niupule.uidesgin_demo.classes01.home.views.HomeDrawCircleView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

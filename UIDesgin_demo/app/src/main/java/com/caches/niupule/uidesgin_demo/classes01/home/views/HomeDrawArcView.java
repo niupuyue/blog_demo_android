@@ -1,4 +1,4 @@
-package com.caches.niupule.uidesgin_demo.classes01.home;
+package com.caches.niupule.uidesgin_demo.classes01.home.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -29,7 +29,7 @@ public class HomeDrawArcView extends View {
         Paint paint1 = new Paint();
         paint1.setStyle(Paint.Style.FILL);
         paint1.setAntiAlias(true);
-        paint1.setColor(Color.parseColor("\"#E75375\""));
+        paint1.setColor(Color.parseColor("#E75375"));
         canvas.drawArc(200,200,400,400,0,90,true,paint1);
 
         paint1.setColor(Color.parseColor("#AFE56E"));
@@ -47,7 +47,7 @@ public class HomeDrawArcView extends View {
         Paint paint2 = new Paint();
         paint2.setStyle(Paint.Style.FILL);
         paint2.setAntiAlias(true);
-        paint2.setColor(Color.parseColor("\"#E75375\""));
+        paint2.setColor(Color.parseColor("#E75375"));
         canvas.drawArc(200,700,400,900,0,90,false,paint2);
 
         paint2.setColor(Color.parseColor("#AFE56E"));
