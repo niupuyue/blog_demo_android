@@ -21,6 +21,7 @@ import android.view.View;
 import com.caches.niupule.uidesgin_demo.classes01.MethodDrawActivity;
 import com.caches.niupule.uidesgin_demo.classes01.MethodDrawPathActivity;
 import com.caches.niupule.uidesgin_demo.classes01.MethodHomeWorkActivity;
+import com.caches.niupule.uidesgin_demo.classes02.ShaderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements SelfViewItemClick
         datas.add(new DataBean("一切的开始onDraw()",0));
         datas.add(new DataBean("onDrawPath()方法",0));
         datas.add(new DataBean("第一课练习题",0));
-
+        datas.add(new DataBean("shader颜色渐变",0));
     }
 
     @Override
@@ -141,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements SelfViewItemClick
                 break;
             case 2:
                 startActivity(new Intent(MainActivity.this,MethodHomeWorkActivity.class));
+                break;
+            case 3:
+                startActivity(new Intent(MainActivity.this, ShaderActivity.class));
                 break;
         }
     }
