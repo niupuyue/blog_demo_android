@@ -21,6 +21,7 @@ import android.view.View;
 import com.caches.niupule.uidesgin_demo.classes01.MethodDrawActivity;
 import com.caches.niupule.uidesgin_demo.classes01.MethodDrawPathActivity;
 import com.caches.niupule.uidesgin_demo.classes01.MethodHomeWorkActivity;
+import com.caches.niupule.uidesgin_demo.classes02.ColorFilterAcitivty;
 import com.caches.niupule.uidesgin_demo.classes02.ShaderActivity;
 
 import java.util.ArrayList;
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SelfViewItemClick
         datas.add(new DataBean("onDrawPath()方法",0));
         datas.add(new DataBean("第一课练习题",0));
         datas.add(new DataBean("shader颜色渐变",0));
+        datas.add(new DataBean("color过滤",0));
     }
 
     @Override
@@ -146,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements SelfViewItemClick
             case 3:
                 startActivity(new Intent(MainActivity.this, ShaderActivity.class));
                 break;
+            case 4:
+                startActivity(new Intent(MainActivity.this,ColorFilterAcitivty.class));
         }
     }
 }

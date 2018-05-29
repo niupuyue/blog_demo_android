@@ -20,6 +20,7 @@
         <activity android:name=".classes01.MethodDrawPathActivity"></activity>
         <activity android:name=".classes01.MethodHomeWorkActivity"></activity>
         <activity android:name=".classes02.ShaderActivity"></activity>
+        <activity android:name=".classes02.ColorFilterAcitivty"></activity>
     </application>
 
 </manifest>
