@@ -13,7 +13,7 @@
 9. 设计模式
 
 10. <a href="https://github.com/xiaoniudadi/blog_demo_android/tree/master/SelfUI_demo">自定义View</a>
-
+11. <a href="http://github.com/xiaoniudadi/blog_demo_android/tree/master/JNI_Demo">JNI编程</a>
 
 
 ## cache
@@ -66,6 +66,8 @@ Retrofit：目前最流行的网络请求框架。他是基于OKHttp网络请求
 ## 自定义View
 
 
+## JNI 编程
+<a href="http://www.paulniu.com/2018/06/12/android-jni">重拾Android路 JNI编程</a>
 
 
 > 以梦为码，不负韶华
