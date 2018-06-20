@@ -14,7 +14,7 @@
 
 10. <a href="https://github.com/xiaoniudadi/blog_demo_android/tree/master/SelfUI_demo">自定义View</a>
 11. <a href="http://github.com/xiaoniudadi/blog_demo_android/tree/master/JNI_Demo">JNI编程</a>
-
+12. <a href="http://gitub.com/xiaoniudadi/blog_demo_android/tree/master/FileShare_demo">android分享文件</a>
 
 ## cache
 
@@ -68,6 +68,13 @@ Retrofit：目前最流行的网络请求框架。他是基于OKHttp网络请求
 
 ## JNI 编程
 <a href="http://www.paulniu.com/2018/06/12/android-jni">重拾Android路 JNI编程</a>
+
+## Android分享
+关于Android的分享，我相信大家都有接触过，特别是对于一些特殊的应用，比如网上商城，我们经常通过这样的分享操作，把我们看到比较喜欢的物品分享给我们的朋友。
+那么我们的分享其实不仅仅是分享一个链接，一个图片，有时候我们还会分享一个视频，分享一个文件，那么这些都是我们的手机需要执行的操作。这个例子中包含两个部分
+- 利用第三方分享集成，例如友盟等
+- 自定义实现，通过Android中的intent，帮我们实现
+<a href="http://www.paulniu.com/2018/06/20/share">重拾Android路 Android分享</a>
 
 
 > 以梦为码，不负韶华
