@@ -1,8 +1,11 @@
 package com.paulniu.camerademo
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.media.MediaScannerConnection
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 /**
  * @author:Niu Puyue
@@ -28,6 +31,17 @@ object CameraUtil {
         val os = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
         return os.toByteArray()
+    }
+
+    /**
+     * 兼容android 10
+     * 更新图库
+     *
+     * @param mContext
+     * @param file
+     */
+    fun updatePhotoAlbum(mContext: Context, file: File) {
+        MediaScannerConnection.scanFile(mContext.applicationContext, arrayOf(file.absolutePath), arrayOf("image/jpeg")) { path, uri -> }
     }
 
 }

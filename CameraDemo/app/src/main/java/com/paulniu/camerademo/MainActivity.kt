@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.core.app.ActivityCompat
 import com.paulniu.camerademo.camera1.Camera1SurfaceActivity
+import com.paulniu.camerademo.camera2.Camera2SurfaceActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

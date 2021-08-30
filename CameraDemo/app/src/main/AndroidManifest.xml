@@ -28,7 +28,7 @@
             android:name=".camera1.Camera1SurfaceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Camera2SurfaceActivity"
+            android:name=".camera2.Camera2SurfaceActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".CameraPreviewActivity"
