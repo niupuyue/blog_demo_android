@@ -21,7 +21,11 @@ import com.xizhi_ai.xizhi_common.camera.util.getPreviewOutputSize
  * time:6/30/21 4:38 PM
  * desc: camera1 拍照识别图片 工具类
  */
-class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraManager: CameraManager) : Camera.PreviewCallback {
+class Camera1Helper(
+    activity: Activity,
+    surfaceView: AutoFitSurfaceView,
+    cameraManager: CameraManager
+) : Camera.PreviewCallback {
 
     private var mActivity = activity
     private var mSurfaceView = surfaceView
@@ -45,6 +49,39 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
     private var picWidth = 1080
     private var picHeight = 1920
 
+    private var mFrontCameraInfo: Camera.CameraInfo? = null
+    private var mFrontCameraID: Int? = 0
+    private var mBackCameraInfo: Camera.CameraInfo? = null
+    private var mBackCameraID: Int? = 0
+
+    private fun initCameraInfo() {
+        val phoneNumbers = Camera.getNumberOfCameras()
+        for (cameraId in 0 until phoneNumbers) {
+            val cameraInfo = Camera.CameraInfo()
+            Camera.getCameraInfo(cameraId, cameraInfo)
+            Log.e("Camera1Helper", cameraInfo.toString())
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                // 前置摄像头
+                mFrontCameraID = cameraId
+                mFrontCameraInfo = cameraInfo
+            } else if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                // 后置摄像头
+                mBackCameraID = cameraId
+                mBackCameraInfo = cameraInfo
+            }
+        }
+    }
+
+    private fun getFitPreviewOutputSize(camera: Camera): Size {
+        val parameters = camera.parameters
+        val supportPreviewSize = parameters.supportedPreviewSizes
+        var result = Size(1920, 1080)
+        supportPreviewSize.forEach { size ->
+            Log.e("Camera1Helper", size.toString())
+            result = Size(size.width, size.height)
+        }
+        return result
+    }
 
     override fun onPreviewFrame(data: ByteArray?, camera: Camera?) {
         mCameraHelperCallback?.onPreviewFrame(data)
@@ -57,7 +94,7 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
         mSurfaceHolder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
                 previewSize = getPreviewOutputSize(
-                        mSurfaceView.display, characteristics, SurfaceHolder::class.java
+                    mSurfaceView.display, characteristics, SurfaceHolder::class.java
                 )
                 mSurfaceView.setAspectRatio(previewSize.width, previewSize.height)
                 if (mCamera == null) {
@@ -68,7 +105,12 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
                 startPreview()
             }
 
-            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) = Unit
+            override fun surfaceChanged(
+                holder: SurfaceHolder,
+                format: Int,
+                width: Int,
+                height: Int
+            ) = Unit
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {
                 releaseCamera()
@@ -97,6 +139,7 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
         if (getSupportCamera(cameraFace)) {
             try {
                 mCamera = Camera.open(cameraFace)
+                getFitPreviewOutputSize(mCamera!!)
                 mCamera?.let { initCameraParamter(it) }
                 mCamera?.setPreviewCallback(this)
             } catch (e: Exception) {
@@ -118,14 +161,19 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
 
             // 获取指定的宽高/与指定宽高比例相近的尺寸
             // 设置预览尺寸
-            val bestPreviewSize = getBestSize(mSurfaceView.width, mSurfaceView.height, mCameraParamter.supportedPreviewSizes)
+            val bestPreviewSize = getBestSize(
+                mSurfaceView.width,
+                mSurfaceView.height,
+                mCameraParamter.supportedPreviewSizes
+            )
             // 设置最佳拍照尺寸
             bestPreviewSize?.let { mCameraParamter.setPreviewSize(it.width, it.height) }
 
             // 设置拍照保存图片的尺寸
             picWidth = DensityUtil.getScreenWidth(mActivity)
-            picHeight = DensityUtil.getScreenHeight(mActivity) - DensityUtil.dp2px(mActivity,100f)
-            val bestPicSize = getBestSize(picWidth, picHeight, mCameraParamter.supportedPictureSizes)
+            picHeight = DensityUtil.getScreenHeight(mActivity) - DensityUtil.dp2px(mActivity, 100f)
+            val bestPicSize =
+                getBestSize(picWidth, picHeight, mCameraParamter.supportedPictureSizes)
             bestPicSize?.let {
                 mCameraParamter.setPictureSize(it.width, it.height)
             }
@@ -159,7 +207,11 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
     /**
      * 计算最佳的相机尺寸
      */
-    private fun getBestSize(targetWidth: Int, targetHeight: Int, sizeList: List<Camera.Size>): Camera.Size? {
+    private fun getBestSize(
+        targetWidth: Int,
+        targetHeight: Int,
+        sizeList: List<Camera.Size>
+    ): Camera.Size? {
         var bestSize: Camera.Size? = null
         // 计算宽高的比例
         val targetRotia = (targetHeight.toDouble()) / targetWidth
@@ -214,7 +266,8 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
         if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             // 如果是前置摄像头
             mDisplayOrientation = (cameraInfo.orientation + screenAngle) % 360
-            mDisplayOrientation = (360 - mDisplayOrientation) % 360          // compensate the mirror
+            mDisplayOrientation =
+                (360 - mDisplayOrientation) % 360          // compensate the mirror
         } else {
             mDisplayOrientation = (cameraInfo.orientation - screenAngle + 360) % 360
         }
@@ -296,5 +349,6 @@ class Camera1Helper(activity: Activity, surfaceView: AutoFitSurfaceView, cameraM
 
     init {
         initCameraConfig()
+        initCameraInfo()
     }
 }
